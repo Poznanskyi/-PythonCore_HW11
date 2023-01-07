@@ -15,9 +15,11 @@ class Field:
     def __str__(self):
         return self.value
 
+    @property
     def value(self):
         return self._value
 
+    @value.setter
     def value(self, value):
         self._value = value
 
@@ -27,6 +29,7 @@ class Name(Field):
 
 
 class Phone(Field):
+
     def sanitaze_phone_number(phone):
 
         try:
@@ -46,6 +49,7 @@ class Phone(Field):
         def __init__(self, value):
             self.value = Phone.sanitize_phone_number(value)
 
+        @value.setter
         def value(self, value):
             self.value = Phone.sanitize_phone_number(value)
 
@@ -53,6 +57,11 @@ class Birthday(Field):
     def __init__(self, value):
         self.value = value
 
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
     def value(self, value):
         if value:
             try:
